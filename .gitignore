@@ -1,0 +1,10 @@
+*.pyc
+.idea/
+*.log
+.settings/*
+.pydevproject
+.project
+.*.swp
+*.pid
+celery-scripts/celeryd.default.local
+local_settings.py
