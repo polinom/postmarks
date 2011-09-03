@@ -10,7 +10,7 @@ class Stamp(models.Model):
     description = models.TextField(max_length=1000, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True ,editable=False)
     updated = models.DateTimeField(auto_now=True, editable=False)
-    url = models.URLField(max_length=150, verify_exists=False, null=True, blank=True, widget=)
+    url = models.URLField(max_length=150, verify_exists=False, null=True, blank=True)
     
     
     def image(self):
