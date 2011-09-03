@@ -33,9 +33,9 @@ AUCTION_SITES = [
 
 class PriceAndTimeSold(models.Model):
     stamp = models.ForeignKey(Stamp)
-    time = models.DateTimeField()
-    start_price = models.FloatField()
-    sold_price = models.FloatField()
+    time = models.DateTimeField(null=True, blank=True)
+    start_price = models.FloatField(null=True, blank=True)
+    sold_price = models.FloatField(null=True, blank=True)
     auction = models.PositiveIntegerField(choices=AUCTION_SITES)
 
 class Picture(models.Model):
