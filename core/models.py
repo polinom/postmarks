@@ -5,10 +5,12 @@ from django.db import models
 
 class Stamp(models.Model):
     main_picture = models.ImageField(upload_to = 'main_stamp_pic')
-    name = models.CharField(max_length=100)
-    description = models.TextField(max_length=1000)
+    name = models.CharField(max_length=100, null=True, blank=True)
+    year = models.IntegerField(default=0, blank=True)
+    description = models.TextField(max_length=1000, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True ,editable=False)
     updated = models.DateTimeField(auto_now=True, editable=False)
+    url = models.URLField(max_length=150, verify_exists=False, null=True, blank=True, widget=)
     
     
     def image(self):
@@ -20,20 +22,21 @@ class Stamp(models.Model):
     
     image.allow_tags = True
 
+
 AUCTION_SITES = [
               (0,'eBuy.com'),
               (1,'Molotok.ru'),
-              (2,'dasdsadsa'),
-              (3,'bfdfdgfd'),
+              (2,'www.cherrystoneauctions.com'),
+              (3,'www.raritanstamps.com'),
+              (4,'-- not implemented --'),
                 ]
 
-    
 class PriceAndTimeSold(models.Model):
     stamp = models.ForeignKey(Stamp)
     time = models.DateTimeField()
-    price = models.FloatField()
+    start_price = models.FloatField()
+    sold_price = models.FloatField()
     auction = models.PositiveIntegerField(choices=AUCTION_SITES)
-    
 
 class Picture(models.Model):
     picture = models.ImageField(upload_to = 'other_stamp_pic')
