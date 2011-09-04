@@ -13,6 +13,7 @@ class StampModelAdmin(admin.ModelAdmin):
     list_display = ('image', 'name', 'description', 'year')
     inlines = [ PriceAndTimeSoldInline,]
     list_filter = ('year',)
+    list_per_page = 20
     
     formfield_overrides = {
                         models.ImageField: {'widget': AdminImageWidget},
