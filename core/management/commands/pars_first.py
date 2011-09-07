@@ -10,7 +10,7 @@ import datetime
 
 settings.MEDIA_ROOT
 
-MAIN_STAMP_PIC = 'main_stamp_pic/'
+MAIN_STAMP_PIC = 'main_stamp2_pic/'
 
 RARITET_SITE = 'http://www.raritanstamps.com/Cat/LotsView.php3?LotF=792&LotL=1162'
 ROOT_SITE = 'http://www.raritanstamps.com/Cat/'
