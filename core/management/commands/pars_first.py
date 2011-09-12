@@ -27,35 +27,34 @@ class Command(BaseCommand):
             tds = tr('td')
             if len(tds[4]('a')):
                 cat_num = tds[2].getText()
-                if 'var' in cat_num:
-                    url_to_page = ROOT_SITE+tds[4]('a')[0].get('href')
-                    item_page = BeautifulSoup(urlopen(url_to_page))
+                url_to_page = ROOT_SITE+tds[4]('a')[0].get('href')
+                item_page = BeautifulSoup(urlopen(url_to_page))
                     
                     
-                    image_url = ROOT_SITE+item_page('img')[0].get('src')
-                    image_name = image_url.split('/')[-1]
-                    urlretrieve(image_url, settings.MEDIA_ROOT+MAIN_STAMP_PIC+image_name)
+                image_url = ROOT_SITE+item_page('img')[0].get('src')
+                image_name = image_url.split('/')[-1]
+                urlretrieve(image_url, settings.MEDIA_ROOT+MAIN_STAMP_PIC+image_name)
                     
-                    description = tds[3].getText()
-                    
-                    
-                    try:
-                        year = int(description.strip()[:4])
-                    except:
-                        year = 0
+                description = tds[3].getText()
                     
                     
-                    name = tds[0].getText().strip()
+                try:
+                    year = int(description.strip()[:4])
+                except:
+                    year = 0
                     
-                    price = float(tds[5].getText().replace('&nbsp;','').strip())
                     
-                    print '---------------------'
-                    print year
-                    print price
-                    print name
-                    print description
-                    print image_url
-                    print url_to_page
+                name = tds[0].getText().strip()
                     
-                    stamp = Stamp2.objects.create(name=name, description=description, url=url_to_page, year=year, main_picture = MAIN_STAMP_PIC+image_name)
-                    PriceAndTimeSold2.objects.create(stamp=stamp, start_price = price, auction=3, time=datetime.datetime(2011, 9, 8, 00, 00, 00))
+                price = float(tds[5].getText().replace('&nbsp;','').strip())
+                    
+                print '---------------------'
+                print year
+                print price
+                print name
+                print description
+                print image_url
+                print url_to_page
+                    
+                stamp = Stamp2.objects.create(name=name, description=description, url=url_to_page, year=year, main_picture = MAIN_STAMP_PIC+image_name)
+                PriceAndTimeSold2.objects.create(stamp=stamp, start_price = price, auction=3, time=datetime.datetime(2011, 9, 8, 00, 00, 00))
