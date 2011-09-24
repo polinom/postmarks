@@ -50,7 +50,7 @@ class Command(BaseCommand):
                     if len(years):
                         year = years[0] 
                     
-                    stamp,created = MolotokStamp.objects.get_or_create(url=page_url, defaults = {'name':name, 'description':name, 'year':year, 'main_picture' : MAIN_STAMP_PIC+image_name})
+                    stamp,created = MolotokStamp.objects.get_or_create(url=page_url, defaults = {'description':name, 'year':year, 'main_picture' : MAIN_STAMP_PIC+image_name})
                     if created:
                         urlretrieve(image_url, settings.MEDIA_ROOT+MAIN_STAMP_PIC+image_name)
                         MolotokPriceAndTimeSold.objects.create(stamp=stamp, start_price = price_us, auction=1, time=auc_date)

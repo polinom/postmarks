@@ -19,6 +19,10 @@ class Stamp(models.Model):
     
     def unicode(self):
         return name
+        
+    class Meta:
+        verbose_name = "cherrystoneauctions stamp"
+        verbose_name_plural = "cherrystoneauctions stamps"
     
     image.allow_tags = True
 
@@ -60,6 +64,11 @@ class Stamp2(models.Model):
 
     def unicode(self):
         return name
+        
+        
+    class Meta:
+        verbose_name = "raritan stamp"
+        verbose_name_plural = "raritan stamps"
 
     image.allow_tags = True
     
