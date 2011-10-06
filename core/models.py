@@ -125,9 +125,25 @@ class MolotokStamp(models.Model):
     updated = models.DateTimeField(auto_now=True, editable=False)
     url = models.URLField(max_length=150, verify_exists=False, null=True, blank=True)
 
+    def __init__(self, *args, **kwargs):
+        super(MolotokStamp, self).__init__(*args, **kwargs)
+        price_obj = MolotokPriceAndTimeSold.objects.filter(stamp=self).order_by('time')[0]
+        self.ptime = price_obj.time
+        self.psold_price = price_obj.sold_price
+        self.pstart_price = price_obj.start_price
 
     def image(self):
         return '<img width="100" src="%s">'%self.main_picture.url
+
+
+    def date(self):
+        return str(self.ptime.date())
+
+    def sold_price(self):
+        return self.psold_price
+
+    def start_price(self):
+        return self.pstart_price
 
 
     def unicode(self):

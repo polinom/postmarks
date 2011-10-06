@@ -64,7 +64,7 @@ class MolotokPriceAndTimeSoldInline(admin.TabularInline):
     extra = 1
 
 class MolotokStampModelAdmin(admin.ModelAdmin):
-    list_display = ('image', 'name', 'description', 'year')
+    list_display = ('image', 'name', 'description', 'year', 'date', 'sold_price', 'start_price')
     inlines = [ MolotokPriceAndTimeSoldInline,]
     list_filter = ('year',)
     list_per_page = 20
