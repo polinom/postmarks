@@ -11,6 +11,23 @@ class Stamp(models.Model):
     created = models.DateTimeField(auto_now_add=True ,editable=False)
     updated = models.DateTimeField(auto_now=True, editable=False)
     url = models.URLField(max_length=150, verify_exists=False, null=True, blank=True)
+
+
+    def __init__(self, *args, **kwargs):
+        super(Stamp, self).__init__(*args, **kwargs)
+        price_obj = PriceAndTimeSold.objects.filter(stamp=self).order_by('time')[0]
+        self.ptime = price_obj.time
+        self.psold_price = price_obj.sold_price
+        self.pstart_price = price_obj.start_price
+
+    def date(self):
+        return str(self.ptime.date())
+
+    def sold_price(self):
+        return self.psold_price
+
+    def start_price(self):
+        return self.pstart_price
     
     
     def image(self):
@@ -57,6 +74,22 @@ class Stamp2(models.Model):
     updated = models.DateTimeField(auto_now=True, editable=False)
     url = models.URLField(max_length=150, verify_exists=False, null=True, blank=True)
 
+    def __init__(self, *args, **kwargs):
+        super(Stamp2, self).__init__(*args, **kwargs)
+        price_obj = PriceAndTimeSold2.objects.filter(stamp=self).order_by('time')[0]
+        self.ptime = price_obj.time
+        self.psold_price = price_obj.sold_price
+        self.pstart_price = price_obj.start_price
+
+    def date(self):
+        return str(self.ptime.date())
+
+    def sold_price(self):
+        return self.psold_price
+
+    def start_price(self):
+        return self.pstart_price
+
 
     def image(self):
         return '<img width="100" src="%s">'%self.main_picture.url
@@ -91,6 +124,24 @@ class eBayStamp(models.Model):
     created = models.DateTimeField(auto_now_add=True ,editable=False)
     updated = models.DateTimeField(auto_now=True, editable=False)
     url = models.URLField(max_length=150, verify_exists=False, null=True, blank=True)
+
+
+
+    def __init__(self, *args, **kwargs):
+        super(eBayStamp, self).__init__(*args, **kwargs)
+        price_obj = eBayPriceAndTimeSold.objects.filter(stamp=self).order_by('time')[0]
+        self.ptime = price_obj.time
+        self.psold_price = price_obj.sold_price
+        self.pstart_price = price_obj.start_price
+
+    def date(self):
+        return str(self.ptime.date())
+
+    def sold_price(self):
+        return self.psold_price
+
+    def start_price(self):
+        return self.pstart_price
 
 
     def image(self):
@@ -132,10 +183,6 @@ class MolotokStamp(models.Model):
         self.psold_price = price_obj.sold_price
         self.pstart_price = price_obj.start_price
 
-    def image(self):
-        return '<img width="100" src="%s">'%self.main_picture.url
-
-
     def date(self):
         return str(self.ptime.date())
 
@@ -148,6 +195,10 @@ class MolotokStamp(models.Model):
 
     def unicode(self):
         return name
+
+    def image(self):
+        return '<img width="100" src="%s">'%self.main_picture.url
+
 
     image.allow_tags = True
     

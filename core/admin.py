@@ -11,7 +11,7 @@ class PriceAndTimeSoldInline(admin.TabularInline):
     extra = 1
 
 class StampModelAdmin(admin.ModelAdmin):
-    list_display = ('image', 'name', 'description', 'year')
+    list_display = ('image', 'name', 'description', 'year', 'date', 'sold_price', 'start_price')
     inlines = [ PriceAndTimeSoldInline,]
     list_filter = ('year',)
     list_per_page = 20
@@ -23,56 +23,28 @@ class StampModelAdmin(admin.ModelAdmin):
                        
 # ----------------------  Raritet stamps admin ----------------------------
 
-class PriceAndTimeSoldInline2(admin.TabularInline):
+class PriceAndTimeSoldInline2(PriceAndTimeSoldInline):
     model = PriceAndTimeSold2
-    fields = ['start_price','sold_price','time','auction',]
-    extra = 1
 
-class StampModelAdmin2(admin.ModelAdmin):
-    list_display = ('image', 'name', 'description', 'year')
+class StampModelAdmin2(StampModelAdmin):
     inlines = [ PriceAndTimeSoldInline2,]
-    list_filter = ('year',)
-    list_per_page = 20
 
-    formfield_overrides = {
-                           models.ImageField: {'widget': AdminImageWidget},
-                           models.URLField: {'widget': URLFieldWidget}
-                          }
 
 # ------------------------- eBay Stamps Admin ------------------------------
 
-class eBayPriceAndTimeSoldInline(admin.TabularInline):
+class eBayPriceAndTimeSoldInline(PriceAndTimeSoldInline):
     model = eBayPriceAndTimeSold
-    fields = ['start_price','sold_price','time','auction',]
-    extra = 1
 
-class eBayStampModelAdmin(admin.ModelAdmin):
-    list_display = ('image', 'name', 'description', 'year')
+class eBayStampModelAdmin(StampModelAdmin):
     inlines = [ eBayPriceAndTimeSoldInline,]
-    list_filter = ('year',)
-    list_per_page = 20
-
-    formfield_overrides = {
-                           models.ImageField: {'widget': AdminImageWidget},
-                           models.URLField: {'widget': URLFieldWidget}
-                          }
 
 # ------------------------ Molotok Syamp Admin -------------------------------
-class MolotokPriceAndTimeSoldInline(admin.TabularInline):
+class MolotokPriceAndTimeSoldInline(PriceAndTimeSoldInline):
     model = MolotokPriceAndTimeSold
-    fields = ['start_price','sold_price','time','auction',]
-    extra = 1
 
-class MolotokStampModelAdmin(admin.ModelAdmin):
-    list_display = ('image', 'name', 'description', 'year', 'date', 'sold_price', 'start_price')
+
+class MolotokStampModelAdmin(StampModelAdmin):
     inlines = [ MolotokPriceAndTimeSoldInline,]
-    list_filter = ('year',)
-    list_per_page = 20
-
-    formfield_overrides = {
-                           models.ImageField: {'widget': AdminImageWidget},
-                           models.URLField: {'widget': URLFieldWidget}
-                          }
 
 
 admin.site.register(eBayStamp,eBayStampModelAdmin)    
