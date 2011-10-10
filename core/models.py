@@ -15,10 +15,11 @@ class Stamp(models.Model):
 
     def __init__(self, *args, **kwargs):
         super(Stamp, self).__init__(*args, **kwargs)
-        price_obj = PriceAndTimeSold.objects.filter(stamp=self).order_by('time')[0]
-        self.ptime = price_obj.time
-        self.psold_price = price_obj.sold_price
-        self.pstart_price = price_obj.start_price
+        if self.id:
+            price_obj = PriceAndTimeSold.objects.filter(stamp=self).order_by('time')[0]
+            self.ptime = price_obj.time
+            self.psold_price = price_obj.sold_price
+            self.pstart_price = price_obj.start_price
 
     def date(self):
         return str(self.ptime.date())
@@ -76,10 +77,11 @@ class Stamp2(models.Model):
 
     def __init__(self, *args, **kwargs):
         super(Stamp2, self).__init__(*args, **kwargs)
-        price_obj = PriceAndTimeSold2.objects.filter(stamp=self).order_by('time')[0]
-        self.ptime = price_obj.time
-        self.psold_price = price_obj.sold_price
-        self.pstart_price = price_obj.start_price
+        if self.id:
+            price_obj = PriceAndTimeSold2.objects.filter(stamp=self).order_by('time')[0]
+            self.ptime = price_obj.time
+            self.psold_price = price_obj.sold_price
+            self.pstart_price = price_obj.start_price
 
     def date(self):
         return str(self.ptime.date())
@@ -129,10 +131,11 @@ class eBayStamp(models.Model):
 
     def __init__(self, *args, **kwargs):
         super(eBayStamp, self).__init__(*args, **kwargs)
-        price_obj = eBayPriceAndTimeSold.objects.filter(stamp=self).order_by('time')[0]
-        self.ptime = price_obj.time
-        self.psold_price = price_obj.sold_price
-        self.pstart_price = price_obj.start_price
+        if self.id:
+            price_obj = eBayPriceAndTimeSold.objects.filter(stamp=self).order_by('time')[0]
+            self.ptime = price_obj.time
+            self.psold_price = price_obj.sold_price
+            self.pstart_price = price_obj.start_price
 
     def date(self):
         return str(self.ptime.date())
@@ -178,10 +181,11 @@ class MolotokStamp(models.Model):
 
     def __init__(self, *args, **kwargs):
         super(MolotokStamp, self).__init__(*args, **kwargs)
-        price_obj = MolotokPriceAndTimeSold.objects.filter(stamp=self).order_by('time')[0]
-        self.ptime = price_obj.time
-        self.psold_price = price_obj.sold_price
-        self.pstart_price = price_obj.start_price
+        if self.id:
+            price_obj = MolotokPriceAndTimeSold.objects.filter(stamp=self).order_by('time')[0]
+            self.ptime = price_obj.time
+            self.psold_price = price_obj.sold_price
+            self.pstart_price = price_obj.start_price
 
     def date(self):
         return str(self.ptime.date())
