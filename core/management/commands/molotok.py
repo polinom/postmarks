@@ -27,7 +27,7 @@ class Command(BaseCommand):
             p = BeautifulSoup(p)
             trs = p('tr')
             if len(trs):
-                for tr in trs[3:]:
+                for tr in trs[4:]:
 
                     a = tr('a', {'class':'popupTrigger'})[0]
                     name = a.get('title')
