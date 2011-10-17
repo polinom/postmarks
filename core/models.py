@@ -16,19 +16,34 @@ class Stamp(models.Model):
     def __init__(self, *args, **kwargs):
         super(Stamp, self).__init__(*args, **kwargs)
         if self.id:
-            price_obj = PriceAndTimeSold.objects.filter(stamp=self).order_by('time')[0]
-            self.ptime = price_obj.time
-            self.psold_price = price_obj.sold_price
-            self.pstart_price = price_obj.start_price
+            price_objs = PriceAndTimeSold.objects.filter(stamp=self).order_by('time')
+            self.ptime = [price.time for price in price_objs]
+            self.psold_price = [price.sold_price for price in price_objs]
+            self.pstart_price = [price.start_price for price in price_objs]
 
     def date(self):
-        return str(self.ptime.date())
+        strng = ''
+        for item in self.ptime:
+            strng += '<div>'
+            strng += str(item.date())
+            strng += '</div><br\>'
+        return strng
 
     def sold_price(self):
-        return self.psold_price
+        strng = ''
+        for item in self.psold_price:
+            strng += '<div>'
+            strng += str(item)
+            strng += '</div><br\>'
+        return strng
 
     def start_price(self):
-        return self.pstart_price
+        strng = ''
+        for item in self.pstart_price:
+            strng += '<div>'
+            strng += str(item)
+            strng += '</div><br\>'
+        return strng
     
     
     def image(self):
@@ -43,6 +58,9 @@ class Stamp(models.Model):
         verbose_name_plural = "cherrystoneauctions stamps"
     
     image.allow_tags = True
+    date.allow_tags = True
+    sold_price.allow_tags = True
+    start_price.allow_tags = True
 
 
 AUCTION_SITES = [
@@ -78,19 +96,34 @@ class Stamp2(models.Model):
     def __init__(self, *args, **kwargs):
         super(Stamp2, self).__init__(*args, **kwargs)
         if self.id:
-            price_obj = PriceAndTimeSold2.objects.filter(stamp=self).order_by('time')[0]
-            self.ptime = price_obj.time
-            self.psold_price = price_obj.sold_price
-            self.pstart_price = price_obj.start_price
+            price_objs = PriceAndTimeSold2.objects.filter(stamp=self).order_by('time')
+            self.ptime = [price.time for price in price_objs]
+            self.psold_price = [price.sold_price for price in price_objs]
+            self.pstart_price = [price.start_price for price in price_objs]
 
     def date(self):
-        return str(self.ptime.date())
+        strng = ''
+        for item in self.ptime:
+            strng += '<div>'
+            strng += str(item.date())
+            strng += '</div><br\>'
+        return strng
 
     def sold_price(self):
-        return self.psold_price
+        strng = ''
+        for item in self.psold_price:
+            strng += '<div>'
+            strng += str(item)
+            strng += '</div><br\>'
+        return strng
 
     def start_price(self):
-        return self.pstart_price
+        strng = ''
+        for item in self.pstart_price:
+            strng += '<div>'
+            strng += str(item)
+            strng += '</div><br\>'
+        return strng
 
 
     def image(self):
@@ -106,6 +139,9 @@ class Stamp2(models.Model):
         verbose_name_plural = "raritan stamps"
 
     image.allow_tags = True
+    date.allow_tags = True
+    sold_price.allow_tags = True
+    start_price.allow_tags = True
     
     
     
@@ -132,19 +168,34 @@ class eBayStamp(models.Model):
     def __init__(self, *args, **kwargs):
         super(eBayStamp, self).__init__(*args, **kwargs)
         if self.id:
-            price_obj = eBayPriceAndTimeSold.objects.filter(stamp=self).order_by('time')[0]
-            self.ptime = price_obj.time
-            self.psold_price = price_obj.sold_price
-            self.pstart_price = price_obj.start_price
+            price_objs = eBayPriceAndTimeSold.objects.filter(stamp=self).order_by('time')
+            self.ptime = [price.time for price in price_objs]
+            self.psold_price = [price.sold_price for price in price_objs]
+            self.pstart_price = [price.start_price for price in price_objs]
 
     def date(self):
-        return str(self.ptime.date())
+        strng = ''
+        for item in self.ptime:
+            strng += '<div>'
+            strng += str(item.date())
+            strng += '</div><br\>'
+        return strng
 
     def sold_price(self):
-        return self.psold_price
+        strng = ''
+        for item in self.psold_price:
+            strng += '<div>'
+            strng += str(item)
+            strng += '</div><br\>'
+        return strng
 
     def start_price(self):
-        return self.pstart_price
+        strng = ''
+        for item in self.pstart_price:
+            strng += '<div>'
+            strng += str(item)
+            strng += '</div><br\>'
+        return strng
 
 
     def image(self):
@@ -155,6 +206,9 @@ class eBayStamp(models.Model):
         return name
 
     image.allow_tags = True
+    date.allow_tags = True
+    sold_price.allow_tags = True
+    start_price.allow_tags = True
     
     
 class eBayPriceAndTimeSold(models.Model):
@@ -182,20 +236,34 @@ class MolotokStamp(models.Model):
     def __init__(self, *args, **kwargs):
         super(MolotokStamp, self).__init__(*args, **kwargs)
         if self.id:
-            price_obj = MolotokPriceAndTimeSold.objects.filter(stamp=self).order_by('time')[0]
-            self.ptime = price_obj.time
-            self.psold_price = price_obj.sold_price
-            self.pstart_price = price_obj.start_price
+            price_objs = MolotokPriceAndTimeSold.objects.filter(stamp=self).order_by('time')
+            self.ptime = [price.time for price in price_objs]
+            self.psold_price = [price.sold_price for price in price_objs]
+            self.pstart_price = [price.start_price for price in price_objs]
 
     def date(self):
-        return str(self.ptime.date())
+        strng = ''
+        for item in self.ptime:
+            strng += '<div>'
+            strng += str(item.date())
+            strng += '</div><br\>'
+        return strng
 
     def sold_price(self):
-        return self.psold_price
+        strng = ''
+        for item in self.psold_price:
+            strng += '<div>'
+            strng += str(item)
+            strng += '</div><br\>'
+        return strng
 
     def start_price(self):
-        return self.pstart_price
-
+        strng = ''
+        for item in self.pstart_price:
+            strng += '<div>'
+            strng += str(item)
+            strng += '</div><br\>'
+        return strng
 
     def unicode(self):
         return name
@@ -205,6 +273,9 @@ class MolotokStamp(models.Model):
 
 
     image.allow_tags = True
+    date.allow_tags = True
+    sold_price.allow_tags = True
+    start_price.allow_tags = True
     
     
 class MolotokPriceAndTimeSold(models.Model):
