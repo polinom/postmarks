@@ -28,32 +28,35 @@ class Command(BaseCommand):
             trs = p('tr')
             if len(trs):
                 for tr in trs[4:]:
+                    if len(tr('a', {'class':'iImg'})):
+                        a = tr('a', {'class':'iImg'})[0]
+                        name = a.get('title')
+                        page_url = ROOT_SITE+a.get('href')
+                        image_url = a.get('data-img').replace('128x96','oryginal')
+                        image_name = image_url.split('/')[-1]+'.jpg'
+                        tds = tr('td')
 
-                    a = tr('a', {'class':'popupTrigger'})[0]
-                    name = a.get('title')
-                    page_url = ROOT_SITE+a.get('href')
-                    image_url = a.get('data-img').replace('64x48','oryginal')
-                    image_name = image_url.split('/')[-1]+'.jpg'
-                    tds = tr('td')
-                    price_us = float(tds[2]('span',{'class':'small'})[0].text.replace('(&#8776;','').replace(' $)','').replace(',','.').replace(' ',''))
-                    to_end = tds[5].text
-                    hours, days = 0, 0
-                    if u'час' in to_end:
-                        hours = int(to_end.replace(u' час.',u''))
-                    elif u'дн' in tds[5].text:
-                        days = int(to_end.replace(u' дн.',u''))
+                        price_us = float(tds[2]('span',{'class':'small'})[0].text.replace('(&#8776;','').replace(' $)','').replace(',','.').replace(' ',''))
+                        to_end = tds[5].text
+                        hours, days = 0, 0
+                        to_end = to_end[-7:]
+                        num = re.search('[0-9]{1,2}',to_end)
+                        if u'час' in to_end:
+                            hours = int(num.group())
+                        elif u'дн' in tds[5].text:
+                            days = int(num.group())
 
-                    auc_date = datetime.datetime.now()+datetime.timedelta(hours=hours, days=days)
-                    print auc_date
-                    years = re.findall(r'19\d\d', name)
-                    year = 0
-                    if len(years):
-                        year = years[0] 
-                    
-                    stamp,created = MolotokStamp.objects.get_or_create(url=page_url, defaults = {'description':name, 'year':year, 'main_picture' : MAIN_STAMP_PIC+image_name})
-                    if created:
-                        urlretrieve(image_url, settings.MEDIA_ROOT+MAIN_STAMP_PIC+image_name)
-                        MolotokPriceAndTimeSold.objects.create(stamp=stamp, start_price = price_us, auction=1, time=auc_date)
+                        auc_date = datetime.datetime.now()+datetime.timedelta(hours=hours, days=days)
+                        print auc_date
+                        years = re.findall(r'19\d\d', name)
+                        year = 0
+                        if len(years):
+                            year = years[0] 
+                        
+                        stamp,created = MolotokStamp.objects.get_or_create(url=page_url, defaults = {'description':name, 'year':year, 'main_picture' : MAIN_STAMP_PIC+image_name})
+                        if created:
+                            urlretrieve(image_url, settings.MEDIA_ROOT+MAIN_STAMP_PIC+image_name)
+                            MolotokPriceAndTimeSold.objects.create(stamp=stamp, start_price = price_us, auction=1, time=auc_date)
 
                 page += 1
             else:
