@@ -10,11 +10,12 @@ import datetime
 
 settings.MEDIA_ROOT
 
-MAIN_STAMP_PIC = 'main_stamp2_pic/'
+MAIN_STAMP_PIC = 'main_stamp2_pic/52/'
 
 RARITET_SITE = 'http://www.raritanstamps.com/Cat/LotsView.php3?LotF=792&LotL=1162'
 RARITET_SITE = 'http://www.raritanstamps.com/Cat/LotsView.php3?LotF=206&LotL=239'
 RARITET_SITE = 'http://www.raritanstamps.com/Cat/LotsView.php3?LotF=1420&LotL=1877'
+RARITET_SITE = 'http://www.raritanstamps.com/Cat/LotsView.php3?LotF=758&LotL=945'
 
 ROOT_SITE = 'http://www.raritanstamps.com/Cat/'
 
@@ -58,6 +59,6 @@ class Command(BaseCommand):
                 print description
                 print image_url
                 print url_to_page
-                name = name + '(51)'
+                name = name + '(52)'
                 stamp = Stamp2.objects.create(name=name, description=description, url=url_to_page, year=year, main_picture = MAIN_STAMP_PIC+image_name)
                 PriceAndTimeSold2.objects.create(stamp=stamp, start_price = price, auction=3, time=datetime.datetime(2011, 9, 8, 00, 00, 00))
